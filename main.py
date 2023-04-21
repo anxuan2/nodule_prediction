@@ -16,7 +16,9 @@ def predict_nodule(tsh, scinti, adeno, eutirads, cyto, tnod, histo):
             return 'Faire scintigraphie'
         elif scinti == 'Oui (nodule autonome)':
             return 'Iode radioactif ou chirurgie'
-    elif tsh >= 1 or scinti == 'Non (pas de nodule autonome)':
+        else:
+            pass
+    elif scinti == 'Non (pas de nodule autonome)':
         if adeno == 'cN1':
             return 'thyroïdectomie totale avec curage récurentiel bilatéral'
         else:
