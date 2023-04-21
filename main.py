@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.title('Nodule prediction')
+st.title("Outil pour l'aide dans la prise en charge thérapeutique des nodules thyroïdiens")
 
 tsh = st.number_input('TSH', 0.00, 200.00)
 scinti = st.selectbox('Scinti', ('Oui (nodule autonome)', 'Non (pas de nodule autonome)', 'Non fait'))
