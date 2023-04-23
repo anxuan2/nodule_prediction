@@ -2,9 +2,9 @@ def predict_nodule(tsh, scinti, adeno, eutirads, cyto, tnod, histo):
     if tsh < 1:
         if scinti == 'Non fait':
             return 'Faire scintigraphie'
-        elif scinti == 'Oui (nodule autonome)':
+        elif scinti == "Présence d'un nodule autonome":
             return 'Iode radioactif ou chirurgie'
-        elif scinti == 'Non (pas de nodule autonome)':
+        elif scinti == 'Pas de nodule autonome':
             return get_second_part_of_tree(adeno, eutirads, cyto, tnod, histo)
     else:
         return get_second_part_of_tree(adeno, eutirads, cyto, tnod, histo)
@@ -29,9 +29,9 @@ def get_second_part_of_tree(adeno, eutirads, cyto, tnod, histo):
                 elif tnod < 40:
                     return 'Thyroïdectomie totale'
                 else:
-                    if histo == 'Oui, carcinome papillaire':
+                    if histo == "En faveur d'un carcinome papillaire":
                         return 'Thyroïdectomie totale et Curage récurentiel homolatéral'
-                    elif histo == 'Non, bénin':
+                    elif histo == "En faveur d'un nodule bénin":
                         return 'Thyroïdectomie totale'
                     else:
                         return 'Thyroïdectomie totale et Examen extemporané'
