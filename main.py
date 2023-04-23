@@ -1,14 +1,6 @@
 import streamlit as st
 
-st.title("Outil pour l'aide dans la prise en charge thérapeutique des nodules thyroïdiens test")
-
-tsh = st.number_input('TSH', 0.00, 200.00)
-scinti = st.selectbox('Scinti', ('Oui (nodule autonome)', 'Non (pas de nodule autonome)', 'Non fait'))
-adeno = st.selectbox('Adeno', ('cN0', 'cN1'))
-eutirads = st.selectbox('Eutirads', ('2', '3', '4', '5'))
-cyto = st.selectbox('Cyto', ('I', 'II', 'III', 'IV', 'V', 'VI', 'non fait'))
-tnod = st.number_input('Tnod', 0, 1000)
-histo = st.selectbox('Histo', ('Oui, carcinome papillaire', 'Non, bénin', 'Non fait'))
+st.title("Outil pour l'aide dans la prise en charge thérapeutique des nodules thyroïdiens")
 
 
 def predict_nodule(tsh, scinti, adeno, eutirads, cyto, tnod, histo):
@@ -25,7 +17,7 @@ def predict_nodule(tsh, scinti, adeno, eutirads, cyto, tnod, histo):
 
 def get_second_part_of_tree(adeno, eutirads, cyto, tnod, histo):
     if adeno == 'cN1':
-        return 'thyroïdectomie totale avec curage récurentiel bilatéral'
+        return 'Thyroïdectomie totale avec curage récurentiel bilatéral'
     else:
         if eutirads == 2 or (eutirads == 3 and tnod <= 20) or (eutirads == 4 and tnod <= 15) or (eutirads == 5 and tnod <= 10):
             return 'Surveillance'
@@ -33,7 +25,7 @@ def get_second_part_of_tree(adeno, eutirads, cyto, tnod, histo):
             if cyto == 'II':
                 return 'Surveillance'
             elif cyto =='I' or cyto == 'III':
-                return 'controle de la cytoponction'
+                return 'Contrôle de la cytoponction'
             elif cyto == 'IV':
                 return 'Loboisthmectomie'
             elif cyto == 'V' or cyto == 'VI':
@@ -51,6 +43,14 @@ def get_second_part_of_tree(adeno, eutirads, cyto, tnod, histo):
             elif cyto == 'non fait':
                 return 'Faire cytoponction'
 
+
+tsh = st.number_input('TSH', 0.00, 200.00)
+scinti = st.selectbox('Scinti', ('Oui (nodule autonome)', 'Non (pas de nodule autonome)', 'Non fait'))
+adeno = st.selectbox('Adeno', ('cN0', 'cN1'))
+eutirads = st.selectbox('Eutirads', ('2', '3', '4', '5'))
+cyto = st.selectbox('Cyto', ('I', 'II', 'III', 'IV', 'V', 'VI', 'non fait'))
+tnod = st.number_input('Tnod', 0, 1000)
+histo = st.selectbox('Histo', ('Oui, carcinome papillaire', 'Non, bénin', 'Non fait'))
 
 if st.button('Run'):
     st.title(predict_nodule(tsh, scinti, adeno, eutirads, cyto, tnod, histo))
