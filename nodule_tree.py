@@ -37,3 +37,4 @@ def get_second_part_of_tree(adeno, eutirads, cyto, tnod, histo):
                         return 'Thyroïdectomie totale et Examen extemporané'
             elif cyto == 'non fait':
                 return 'Faire cytoponction'
+
