@@ -16,7 +16,7 @@ with col3:
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
-    eutirads = st.selectbox('Score EU-TIRADS', ('2', '3', '4', '5'))
+    eutirads = st.selectbox('Score EU-TIRADS', (2, 3, 4, 5))
 with col2:
     cyto = st.selectbox('Cytologie : Score Bethesda', ('I', 'II', 'III', 'IV', 'V', 'VI', 'non fait'))
 with col3:
