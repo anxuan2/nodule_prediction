@@ -29,6 +29,8 @@ def first_tree_left(scinti, enceinte, cyto, nod_bilat_comp, nod_bilat, tnod, ade
     elif scinti == 'Pas de nodule autonome':
         return second_tree(cyto, nod_bilat_comp, nod_bilat, tnod, adeno, cancer_bilat, histo)
 
+#######################################################################################################################
+
 
 def second_tree(cyto, nod_bilat_comp, nod_bilat, tnod, adeno, cancer_bilat, histo):
     if cyto == 'II':
@@ -45,7 +47,7 @@ def second_tree_left(nod_bilat_comp):
     if nod_bilat_comp == 'Oui':
         return 'Thyroïdectomie totale'
     elif nod_bilat_comp == 'Non':
-        'Surveillance'
+        return 'Surveillance'
 
 
 def second_tree_right(nod_bilat, tnod, cyto, adeno, cancer_bilat, histo):
@@ -59,6 +61,8 @@ def second_tree_right(nod_bilat, tnod, cyto, adeno, cancer_bilat, histo):
                 return third_tree(adeno, cyto, tnod, cancer_bilat, histo)
         else:
             return third_tree(adeno, cyto, tnod, cancer_bilat, histo)
+
+#######################################################################################################################
 
 
 def third_tree(adeno, cyto, tnod, cancer_bilat, histo):

@@ -10,7 +10,7 @@ with col1:
 with col2:
     enceinte = st.selectbox('Femme enceinte / Projet grossesse / Nodule compressif', ('Oui', 'Non'))
 with col3:
-    adeno = st.selectbox('Adénopathies cervicales', ('cN0', 'cN1'))
+    adeno = st.selectbox('Adénopathies cervicales', ('cN0', 'cN1a', 'cN1b'))
 
 col1, col2, col3 = st.columns(3)
 with col1:
