@@ -1,0 +1,100 @@
+def predict_nodule_v2(scinti, tnod, eutirads, tsh, enceinte, cyto, nod_bilat_comp, nod_bilat,
+                      adeno, cancer_bilat, histo):
+    if tsh <= 0.4:
+        return first_tree_left(scinti, enceinte, cyto, nod_bilat_comp, nod_bilat, tnod, adeno, cancer_bilat, histo)
+    else:
+        return first_tree_right(eutirads, tnod, tsh, scinti, enceinte, cyto, nod_bilat_comp, nod_bilat,
+                                adeno, cancer_bilat, histo)
+
+
+def first_tree_right(eutirads, tnod, tsh, scinti, enceinte, cyto, nod_bilat_comp, nod_bilat, adeno,
+                     cancer_bilat, histo):
+    if eutirads == 2 or (eutirads == 3 and tnod <= 20) or (eutirads == 4 and tnod <= 15) or (eutirads == 5 and tnod <= 10):
+        return 'Surveillance'
+    else:
+        if tsh < 1:
+            return first_tree_left(scinti, enceinte, cyto, nod_bilat_comp, nod_bilat, tnod, adeno, cancer_bilat, histo)
+        else:
+            return second_tree(cyto, nod_bilat_comp, nod_bilat, tnod, adeno, cancer_bilat, histo)
+
+
+def first_tree_left(scinti, enceinte, cyto, nod_bilat_comp, nod_bilat, tnod, adeno, cancer_bilat, histo):
+    if scinti == "Présence d'un nodule autonome":
+        if enceinte == 'Oui':
+            return 'Chirurgie'
+        elif enceinte == 'Non':
+            return 'Iode radioactif'
+    elif scinti == 'Non fait':
+        return 'Faire scintographie'
+    elif scinti == 'Pas de nodule autonome':
+        return second_tree(cyto, nod_bilat_comp, nod_bilat, tnod, adeno, cancer_bilat, histo)
+
+
+def second_tree(cyto, nod_bilat_comp, nod_bilat, tnod, adeno, cancer_bilat, histo):
+    if cyto == 'II':
+        return second_tree_left(nod_bilat_comp)
+    elif cyto == 'I' or cyto == 'III':
+        return 'Contrôle de la cytoponction'
+    elif cyto == 'IV' or cyto == 'V' or cyto == 'VI':
+        return second_tree_right(nod_bilat, tnod, cyto, adeno, cancer_bilat, histo)
+    elif cyto == 'Non fait':
+        return 'faire cytoponction'
+
+
+def second_tree_left(nod_bilat_comp):
+    if nod_bilat_comp == 'Oui':
+        return 'Thyroïdectomie totale'
+    elif nod_bilat_comp == 'Non':
+        'Surveillance'
+
+
+def second_tree_right(nod_bilat, tnod, cyto, adeno, cancer_bilat, histo):
+    if nod_bilat == 'Non':
+        return third_tree(adeno, cyto, tnod, cancer_bilat, histo)
+    elif nod_bilat == 'Oui':
+        if (cyto == 'IV' and tnod > 40) or (cyto == 'V' and tnod > 20) or (cyto == 'VI' and tnod > 20):
+            if adeno == 'cN0':
+                return 'Thyroïdectomie totale'
+            else:
+                return third_tree(adeno, cyto, tnod, cancer_bilat, histo)
+        else:
+            return third_tree(adeno, cyto, tnod, cancer_bilat, histo)
+
+
+def third_tree(adeno, cyto, tnod, cancer_bilat, histo):
+    if adeno == 'cN0':
+        return third_tree_left(cyto, tnod, cancer_bilat, histo)
+    elif adeno == 'cN1a':
+        return 'Thyroïdectomie totale + curage central homolateral'
+    elif adeno == 'cN1b':
+        return 'Thyroïdectomie totale + curage latéral III et IV + curage central homotruc'
+
+
+def third_tree_left(cyto, tnod, cancer_bilat, histo):
+    if cyto == 'I' or cyto == 'II' or cyto == 'III' or cyto == 'IV':
+        return 'Loboisthmectomie'
+    if cyto == 'V' or cyto == 'VI':
+        return third_tree_central(tnod, cancer_bilat, histo)
+
+
+def third_tree_central(tnod, cancer_bilat, histo):
+    if cancer_bilat == 'Oui':
+        return 'Thyroidectomie totale + curage central bilatéral'
+    elif cancer_bilat == 'Non':
+        return third_tree_right(tnod, histo)
+
+
+def third_tree_right(tnod, histo):
+    if tnod < 20:
+        return 'Loboisthmectomie'
+    elif tnod < 40:
+        return 'Thyroïdectomie totale'
+    elif tnod >= 40:
+        if histo == "En faveur d'un carcinome papillaire":
+            return 'Thyroïdectomie totale et Curage récurentiel homolatéral'
+        elif histo == "En faveur d'un nodule bénin":
+            return 'Thyroïdectomie totale'
+        elif histo == 'Non fait':
+            return 'Thyroïdectomie totale et Examen extemporané'
+
+
