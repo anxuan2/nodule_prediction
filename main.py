@@ -25,6 +25,10 @@ with col2:
                          ('Non fait', "En faveur d'un carcinome papillaire", "En faveur d'un nodule bénin"))
 
 if st.button('Run'):
+    color_n = ['black' for _ in range(32)]
+    style_n = ['solid' for _ in range(32)]
+    color_e = ['black' for _ in range(36)]
+    style_e = ['solid' for _ in range(36)]
     prediction, color_n, color_e, style_n, style_e = predict_nodule_v3(tsh, tnod, eutirads,
                                                                          adeno, cyto, nod_bilat, scinti,
                                                                          enceinte, cancer_bilat, histo)
