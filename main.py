@@ -1,12 +1,11 @@
 import streamlit as st
-from nodule_tree import predict_nodule_v2
 from tree_vizualization import create_nodule_tree
 from nodule_tree_v2 import predict_nodule_v3
-
 color_n = ['black' for _ in range(32)]
 style_n = ['solid' for _ in range(32)]
 color_e = ['black' for _ in range(36)]
 style_e = ['solid' for _ in range(36)]
+
 st.title("Outil pour l'aide dans la prise en charge thérapeutique des nodules thyroïdiens")
 
 col1, col2 = st.columns(2)
@@ -30,10 +29,11 @@ with col2:
 
 if st.button('Run'):
     prediction, color_n, color_e, style_n, style_e = predict_nodule_v3(tsh, tnod, eutirads,
-                                                                         adeno, cyto, nod_bilat, scinti,
-                                                                         enceinte, cancer_bilat, histo)
+                                                                       adeno, cyto, nod_bilat, scinti,
+                                                                       enceinte, cancer_bilat, histo,
+                                                                       color_n, style_n, color_e, style_e)
     st.title(prediction)
-    st.graphviz_chart(create_nodule_tree(color_n, style_n, color_e, style_e))
+    st.graphviz_chart(create_nodule_tree(color_n, style_n, color_e, style_e), use_container_width=False)
 
 st.write("NB 1: L'algorithme de prise en charge se base sur le **consensus SFE-AFCE-SFMN 2022 sur la prise en charge des nodules thyroïdiens**.")
 st.write("NB 2: L'utilisation est dédiée pour la prise en charge des nodules thyroïdiens. Il n'est pas à utiliser pour les autres pathologies thyroïdiennes telles que l'hypo ou l'hyperthyroïdie par exemple.")
