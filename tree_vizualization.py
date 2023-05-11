@@ -22,11 +22,11 @@ def create_nodule_tree(color_n, style_n, color_e, style_e):
     dot.edge('enceinte1', 'chirurgie1', 'Oui', fillcolor=color_e[4], color=color_e[4], fontcolor=color_e[4], style=style_e[4])
     dot.edge('enceinte1', 'iode1', 'Non', fillcolor=color_e[5], color=color_e[5], fontcolor=color_e[5], style=style_e[5])
 
-    dot.node('surveillance1', 'Surveillance', shape='box', fillcolor=color_n[7], color=color_n[7], fontcolor=color_n[7], style=style_n[7])
-    dot.edge('euti1', 'surveillance1', 'Oui', fillcolor=color_e[6], color=color_e[6], fontcolor=color_e[6], style=style_e[6])
-
     dot.node('tsh2', 'TSH > 1', fillcolor=color_n[8], color=color_n[8], fontcolor=color_n[8], style=style_n[8])
     dot.edge('euti1', 'tsh2', 'Non', fillcolor=color_e[7], color=color_e[7], fontcolor=color_e[7], style=style_e[7])
+
+    dot.node('surveillance1', 'Surveillance', shape='box', fillcolor=color_n[7], color=color_n[7], fontcolor=color_n[7], style=style_n[7])
+    dot.edge('euti1', 'surveillance1', 'Oui', fillcolor=color_e[6], color=color_e[6], fontcolor=color_e[6], style=style_e[6])
 
     dot.edge('tsh2', 'scinti1', 'Non', fillcolor=color_e[8], color=color_e[8], fontcolor=color_e[8], style=style_e[8])
     dot.node('cyto1', 'Cytoponction', fillcolor=color_n[9], color=color_n[9], fontcolor=color_n[9], style=style_n[9])
@@ -91,7 +91,7 @@ def create_nodule_tree(color_n, style_n, color_e, style_e):
     dot.edge('cancer2', 'thyroi7', 'Non fait', fillcolor=color_e[32], color=color_e[32], fontcolor=color_e[32], style=style_e[32])
     dot.edge('cancer2', 'thyroi6', 'Non', fillcolor=color_e[33], color=color_e[33], fontcolor=color_e[33], style=style_e[33])
     dot.edge('cancer2', 'thyroi4', 'Oui', fillcolor=color_e[34], color=color_e[34], fontcolor=color_e[34], style=style_e[34])
-    return dot
+    return dot.render('tree_nodule', view=False, format='png')
 
 #color_n = ['black' for _ in range(32)]
 #style_n = ['solid' for _ in range(32)]
