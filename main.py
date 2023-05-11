@@ -33,7 +33,6 @@ if st.button('Run'):
                                                                        enceinte, cancer_bilat, histo,
                                                                        color_n, style_n, color_e, style_e)
     st.title(prediction)
-    st.title('test')
     st.image(create_nodule_tree(color_n, style_n, color_e, style_e), width=1200)
 
 st.write("NB 1: L'algorithme de prise en charge se base sur le **consensus SFE-AFCE-SFMN 2022 sur la prise en charge des nodules thyroïdiens**.")
