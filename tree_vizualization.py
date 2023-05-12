@@ -3,7 +3,7 @@ from graphviz import Digraph
 
 def create_nodule_tree(color_n, style_n, color_e, style_e):
     dot = Digraph(comment='Arbre de décision pour le cancer de la thyroïde')
-
+    dot.format = 'png'
     # Créer les nœuds de l'arbre
     dot.node('tsh1', 'TSH <= 0.4', fillcolor=color_n[0], color=color_n[0], fontcolor=color_n[0], style=style_n[0])
     dot.node('scinti1', 'Scintigraphie', fillcolor=color_n[1], color=color_n[1], fontcolor=color_n[1], style=style_n[1])
@@ -91,7 +91,7 @@ def create_nodule_tree(color_n, style_n, color_e, style_e):
     dot.edge('cancer2', 'thyroi7', 'Non fait', fillcolor=color_e[32], color=color_e[32], fontcolor=color_e[32], style=style_e[32])
     dot.edge('cancer2', 'thyroi6', 'Non', fillcolor=color_e[33], color=color_e[33], fontcolor=color_e[33], style=style_e[33])
     dot.edge('cancer2', 'thyroi4', 'Oui', fillcolor=color_e[34], color=color_e[34], fontcolor=color_e[34], style=style_e[34])
-    return dot.render('tree_nodule', view=False, format='png')
+    return dot.render('tree_nodule', view=False)
 
 #color_n = ['black' for _ in range(32)]
 #style_n = ['solid' for _ in range(32)]
