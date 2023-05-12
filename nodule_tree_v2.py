@@ -1,5 +1,4 @@
-def predict_nodule_v3(tsh, tnod, eutirads, adeno, cyto, nod_bilat, scinti, enceinte,
-                      cancer_bilat, histo, color_n, style_n, color_e, style_e):
+def predict_nodule(tsh, tnod, eutirads, scinti, enceinte, color_n, style_n, color_e, style_e):
     color_n[0] = 'red'
     style_n[0] = 'bold'
     if tsh <= 0.4:
@@ -7,19 +6,16 @@ def predict_nodule_v3(tsh, tnod, eutirads, adeno, cyto, nod_bilat, scinti, encei
         color_n[1] = 'red'
         style_e[0] = 'bold'
         style_n[1] = 'bold'
-        return first_tree_left(scinti, enceinte, cyto, tnod, adeno, nod_bilat, cancer_bilat, histo,
-                               color_n, style_n, color_e, style_e)
+        return first_tree_left(scinti, enceinte, tnod, color_n, style_n, color_e, style_e)
     elif tsh > 0.4:
         color_e[1] = 'red'
         color_n[2] = 'red'
         style_e[1] = 'bold'
         style_n[2] = 'bold'
-        return first_tree_right(eutirads, tnod, tsh, cyto, nod_bilat, adeno, cancer_bilat, histo, scinti, enceinte,
-                                color_n, style_n, color_e, style_e)
+        return first_tree_right(eutirads, tnod, tsh, scinti, enceinte, color_n, style_n, color_e, style_e)
 
 
-def first_tree_right(eutirads, tnod, tsh, cyto, nod_bilat, adeno, cancer_bilat, histo, scinti, enceinte,
-                     color_n, style_n, color_e, style_e):
+def first_tree_right(eutirads, tnod, tsh, scinti, enceinte, color_n, style_n, color_e, style_e):
     if eutirads == 2 or (eutirads == 3 and tnod <= 20) or (eutirads == 4 and tnod <= 15) or (eutirads == 5 and tnod <= 10):
         color_e[6] = 'red'
         color_n[7] = 'red'
@@ -36,18 +32,16 @@ def first_tree_right(eutirads, tnod, tsh, cyto, nod_bilat, adeno, cancer_bilat, 
             color_n[1] = 'red'
             style_e[8] = 'bold'
             style_n[1] = 'bold'
-            return first_tree_left(scinti, enceinte, cyto, tnod, adeno, nod_bilat, cancer_bilat, histo,
-                                   color_n, style_n, color_e, style_e)
+            return first_tree_left(scinti, enceinte, tnod, color_n, style_n, color_e, style_e)
         else:
             color_e[10] = 'red'
             color_n[9] = 'red'
             style_e[10] = 'bold'
             style_n[9] = 'bold'
-            return second_tree(cyto, nod_bilat, tnod, adeno, cancer_bilat, histo, color_n, style_n, color_e, style_e)
+            return 1, color_n, color_e, style_n, style_e
 
 
-def first_tree_left(scinti, enceinte, cyto, tnod, adeno, nod_bilat, cancer_bilat, histo,
-                    color_n, style_n, color_e, style_e):
+def first_tree_left(scinti, enceinte, tnod, color_n, style_n, color_e, style_e):
     if scinti == "Présence d'un nodule autonome":
         color_e[2] = 'red'
         color_n[3] = 'red'
@@ -76,7 +70,7 @@ def first_tree_left(scinti, enceinte, cyto, tnod, adeno, nod_bilat, cancer_bilat
         color_n[9] = 'red'
         style_e[9] = 'bold'
         style_n[9] = 'bold'
-        return second_tree(cyto, nod_bilat, tnod, adeno, cancer_bilat, histo, color_n, style_n, color_e, style_e)
+        return 1, color_n, color_e, style_n, style_e
 
 #######################################################################################################################
 
@@ -99,7 +93,7 @@ def second_tree(cyto, nod_bilat, tnod, adeno, cancer_bilat, histo, color_n, styl
         color_n[11] = 'red'
         style_e[12] = 'bold'
         style_n[11] = 'bold'
-        return second_tree_right(nod_bilat, tnod, cyto, adeno, cancer_bilat, histo)
+        return second_tree_right(nod_bilat, tnod, cyto, adeno, cancer_bilat, histo, color_n, style_n, color_e, style_e)
     elif cyto == 'Non fait':
         color_e[14] = 'red'
         color_n[13] = 'red'
