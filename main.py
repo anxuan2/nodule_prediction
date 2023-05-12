@@ -35,8 +35,7 @@ if st.button('Run'):
                                                                        color_n, style_n, color_e, style_e)
     st.title(prediction)
     tree = create_nodule_tree(color_n, style_n, color_e, style_e)
-    st.image(tree, width=1200)
-    #st.graphviz_chart(tree)
+    st.image(tree, use_column_width=False, width=1000)
 
 st.write("NB 1: L'algorithme de prise en charge se base sur le **consensus SFE-AFCE-SFMN 2022 sur la prise en charge des nodules thyroïdiens**.")
 st.write("NB 2: L'utilisation est dédiée pour la prise en charge des nodules thyroïdiens. Il n'est pas à utiliser pour les autres pathologies thyroïdiennes telles que l'hypo ou l'hyperthyroïdie par exemple.")
