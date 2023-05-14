@@ -8,7 +8,7 @@ def display_results(prediction, color_n, style_n, color_e, style_e):
     st.image(tree, use_column_width=False, width=1000)
 
 
-def prepare_button_display(old_placeholder, unique_button_key):
+def display_button(old_placeholder, unique_button_key):
     old_placeholder.empty()
     new_placeholder = st.empty()
     bouton_run = new_placeholder.button('Run', key=unique_button_key)

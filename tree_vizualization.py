@@ -92,10 +92,3 @@ def create_nodule_tree(color_n, style_n, color_e, style_e):
     dot.edge('cancer2', 'thyroi4', 'Oui', fillcolor=color_e[34], color=color_e[34], fontcolor=color_e[34], style=style_e[34])
 
     return dot.render('tree_nodule')
-
-#color_n = ['black' for _ in range(32)]
-#style_n = ['solid' for _ in range(32)]
-#color_e = ['black' for _ in range(36)]
-#style_e = ['solid' for _ in range(36)]
-#dot_tree = create_nodule_tree(color_n, style_n, color_e, style_e)
-#dot_tree.render('tree_nodule', view=True)
