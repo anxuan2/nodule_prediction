@@ -1,4 +1,8 @@
-def predict_nodule(tsh, tnod, eutirads, scinti, enceinte, color_n, style_n, color_e, style_e):
+def predict_nodule(tsh, tnod, eutirads, color_n, style_n, color_e, style_e):
+    color_n = color_n.copy()
+    style_n = style_n.copy()
+    color_e = color_e.copy()
+    style_e = style_e.copy()
     color_n[0] = 'red'
     style_n[0] = 'bold'
     if tsh <= 0.4:
@@ -6,16 +10,16 @@ def predict_nodule(tsh, tnod, eutirads, scinti, enceinte, color_n, style_n, colo
         color_n[1] = 'red'
         style_e[0] = 'bold'
         style_n[1] = 'bold'
-        return first_tree_left(scinti, enceinte, tnod, color_n, style_n, color_e, style_e)
+        return 'first_tree_left', color_n, color_e, style_n, style_e
     elif tsh > 0.4:
         color_e[1] = 'red'
         color_n[2] = 'red'
         style_e[1] = 'bold'
         style_n[2] = 'bold'
-        return first_tree_right(eutirads, tnod, tsh, scinti, enceinte, color_n, style_n, color_e, style_e)
+        return first_tree_right(eutirads, tnod, tsh, color_n, style_n, color_e, style_e)
 
 
-def first_tree_right(eutirads, tnod, tsh, scinti, enceinte, color_n, style_n, color_e, style_e):
+def first_tree_right(eutirads, tnod, tsh, color_n, style_n, color_e, style_e):
     if eutirads == 2 or (eutirads == 3 and tnod <= 20) or (eutirads == 4 and tnod <= 15) or (eutirads == 5 and tnod <= 10):
         color_e[6] = 'red'
         color_n[7] = 'red'
@@ -32,16 +36,20 @@ def first_tree_right(eutirads, tnod, tsh, scinti, enceinte, color_n, style_n, co
             color_n[1] = 'red'
             style_e[8] = 'bold'
             style_n[1] = 'bold'
-            return first_tree_left(scinti, enceinte, tnod, color_n, style_n, color_e, style_e)
+            return 'first_tree_left', color_n, color_e, style_n, style_e
         else:
             color_e[10] = 'red'
             color_n[9] = 'red'
             style_e[10] = 'bold'
             style_n[9] = 'bold'
-            return 1, color_n, color_e, style_n, style_e
+            return 'second_tree', color_n, color_e, style_n, style_e
 
 
-def first_tree_left(scinti, enceinte, tnod, color_n, style_n, color_e, style_e):
+def first_tree_left(scinti, enceinte, color_n, style_n, color_e, style_e):
+    color_n = color_n.copy()
+    style_n = style_n.copy()
+    color_e = color_e.copy()
+    style_e = style_e.copy()
     if scinti == "Présence d'un nodule autonome":
         color_e[2] = 'red'
         color_n[3] = 'red'
@@ -70,7 +78,7 @@ def first_tree_left(scinti, enceinte, tnod, color_n, style_n, color_e, style_e):
         color_n[9] = 'red'
         style_e[9] = 'bold'
         style_n[9] = 'bold'
-        return 1, color_n, color_e, style_n, style_e
+        return 'second_tree', color_n, color_e, style_n, style_e
 
 #######################################################################################################################
 
@@ -141,9 +149,9 @@ def second_tree_right(nod_bilat, tnod, cyto, adeno, cancer_bilat, histo, color_n
                 style_n[18] = 'bold'
                 return 'Thyroïdectomie totale', color_n, color_e, style_n, style_e
             else:
-                color_e[35] = 'red'
+                color_e[21] = 'red'
                 color_n[19] = 'red'
-                style_e[35] = 'bold'
+                style_e[21] = 'bold'
                 style_n[19] = 'bold'
                 return third_tree(adeno, cyto, tnod, cancer_bilat, histo, color_n, style_n, color_e, style_e)
         else:
