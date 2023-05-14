@@ -38,6 +38,6 @@ def display_other_parameters():
     cancer_bilat = col1.selectbox('Cancer bilatéral ou Cancer isthmique', ('Non', 'Oui'))
     adeno = col2.selectbox('Adénopathies cervicales', ('cN0', 'cN1a', 'cN1b'))
     cyto = col2.selectbox('Cytologie : Score Bethesda', ('I', 'II', 'III', 'IV', 'V', 'VI', 'Non fait'))
-    histo = col2.selectbox("Histologie (lors de l'examen extemporané)",
+    histo = col1.selectbox("Histologie (lors de l'examen extemporané)",
                            ('Non fait', "En faveur d'un carcinome papillaire", "En faveur d'un nodule bénin"))
     return nod_bilat, cancer_bilat, adeno, cyto, histo
